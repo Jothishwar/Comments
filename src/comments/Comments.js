@@ -1,9 +1,13 @@
 import React,{useEffect,useState} from 'react';
 import {getComments as getCommentsApi } from "../api";
+import Comment from "./Comment";
 
 function Comments({currentUserId}) {
 	const [backendComments,setBackendComments] = useState([]);
 	console.log(backendComments);
+
+	const rootComments = backendComments.filter((backendComment) => 
+		backendComment.parentId === null);
 
 	useEffect(() => {
 		getCommentsApi().then((data)=>{
@@ -12,8 +16,13 @@ function Comments({currentUserId}) {
 	}, [])
 
 	return (
-		<div>
-			<h1>...</h1>			
+		<div className="comments">
+			<h3 className="comment-title">Comments</h3>	
+			<div className="comments-container">
+				{rootComments.map(rootComment => (
+					<Comment key={rootComment.id} comment={rootComment} />
+				))}
+			</div>
 		</div>
 	)
 }

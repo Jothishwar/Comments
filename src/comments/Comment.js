@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-function Comment({key,comment}) {
+function Comment({comment}) {
 	return (
 		<div className="comment">
 			<div className="comment-image-container">
-				<img src="/user-icon.png" alt="usericon" />
+				<AccountCircleIcon fontSize="large" color="primary" style={{ fontSize: 45 }} />
 			</div>
 			<div className="comment-right-part">
 				<div className="comment-content">

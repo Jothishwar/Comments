@@ -1,14 +1,15 @@
 import React,{useEffect,useState} from 'react';
-import {getComments as getCommentsApi } from "../api";
+import {getComments as getCommentsApi,createComment } from "../api";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
 function Comments({currentUserId}) {
 	const [backendComments,setBackendComments] = useState([]);
-	console.log(backendComments);
+	// console.log(backendComments);
 
 	const rootComments = backendComments.filter((backendComment) => 
 		backendComment.parentId === null);
+	console.log(rootComments);
 	const getReplies = (commentId) => {
 		return backendComments.filter((backendComment) => backendComment.parentId === commentId)
 		.sort((a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -16,6 +17,9 @@ function Comments({currentUserId}) {
 
 	const addComment = (text,parentId) => {
 		console.log("add",text,parentId)
+		createComment(text,parentId).then(comment => {
+			setBackendComments([comment,...backendComments])
+		})
 	}
 
 	useEffect(() => {

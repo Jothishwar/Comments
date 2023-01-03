@@ -42,3 +42,14 @@ export const getComments = async() => {
 	},
 	];
 };
+
+export const createComment = async(text,parentId=null) => {
+	return {
+		id : Math.random().toString(36).substr(2,9),
+		body : text,
+		username: "Guest",
+		parentId,
+		userId:"1",
+		createdAt: new Date().toISOString(),
+	};
+};

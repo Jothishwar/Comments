@@ -12,11 +12,6 @@
 	align-items: flex-start;
 	width: 70%;
 }
-.comment{
-	display: flex;
-	justify-content: center;
-}
-
 .comment-right-part{
 	display: flex;
 	flex-direction: column;
@@ -56,6 +51,7 @@ button:hover{
 	background-color: #128573;
 }
 .comment{
+	display: flex;
 	margin: 10px 0;
 }
 .comment-content{

@@ -9,7 +9,7 @@ function Comments({currentUserId}) {
 
 	const rootComments = backendComments.filter((backendComment) => 
 		backendComment.parentId === null);
-	console.log(rootComments);
+	
 	const getReplies = (commentId) => {
 		return backendComments.filter((backendComment) => backendComment.parentId === commentId)
 		.sort((a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -39,6 +39,7 @@ function Comments({currentUserId}) {
 						key={rootComment.id} 
 						comment={rootComment}
 						replies={getReplies(rootComment.id)}
+						currentUserId={currentUserId}
 					/>
 				))}
 			</div>

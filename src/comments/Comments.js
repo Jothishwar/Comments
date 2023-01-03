@@ -27,7 +27,7 @@ function Comments({currentUserId}) {
 	return (
 		<div className="comments">
 			<h2 className="comment-title">Comments</h2>
-			<h3>Write Comment</h3>
+			<h4>Write Comment</h4>
 			<CommentForm submitLabel="Comment" handleSubmit={addComment} />
 			<div className="comments-container">
 				{rootComments.map(rootComment => (

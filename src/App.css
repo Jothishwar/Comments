@@ -63,3 +63,20 @@ button:hover{
 	margin-right: 20px;
 	color: blue;
 }
+
+.comment-actions{
+	display: flex;
+	align-items: center;
+	color: grey;
+	font-size: small;
+	margin-top: 2px;
+}
+
+.comment-action{
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.comment-action:hover{
+	color: blue;
+}

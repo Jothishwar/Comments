@@ -22,7 +22,7 @@ export const getComments = async() => {
 		username: "John",
 		userId: "2",
 		parentId: "1",
-		createdAt: "2022-08-16T23:00:33.010+02:00",
+		createdAt: "2022-08-15T23:00:33.010+02:00",
 	},
 	{
 		id: "4",
@@ -30,6 +30,14 @@ export const getComments = async() => {
 		username: "John",
 		userId: "2",
 		parentId: "2",
+		createdAt: "2022-08-16T23:00:33.010+02:00",
+	},
+	{
+		id: "4",
+		body: "First comment second child",
+		username: "John",
+		userId: "2",
+		parentId: "1",
 		createdAt: "2022-08-16T23:00:33.010+02:00",
 	},
 	];

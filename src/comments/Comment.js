@@ -1,7 +1,7 @@
 import React from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-function Comment({comment,replies,currentUserId }) {
+function Comment({comment,replies,currentUserId,deleteComment }) {
 
 	const canReply = Boolean(currentUserId);
 	const timepassed = new Date() - new Date(comment.createdAt) > 300000;
@@ -23,7 +23,13 @@ function Comment({comment,replies,currentUserId }) {
 				<div className="comment-actions">
 					{canReply && <div className="comment-action">Reply</div>}
 					{canEdit && <div className="comment-action">Edit</div>}
-					{canDelete && <div className="comment-action">Delete</div>}
+					{canDelete && <div 
+						className="comment-action" 
+						onClick={() => deleteComment(comment.id)}
+						>
+							Delete
+						</div>
+					}
 				</div>
 				{replies.length > 0 && (
 					<div className="replies">
@@ -32,6 +38,7 @@ function Comment({comment,replies,currentUserId }) {
 								comment={reply}
 								replies={[]}
 								currentUserId={currentUserId}
+								deleteComment={deleteComment}
 							/>
 						))}
 					</div>

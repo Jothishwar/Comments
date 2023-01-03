@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {getComments as getCommentsApi,createComment } from "../api";
+import {getComments as getCommentsApi,createComment,deleteComment as deleteCommentApi } from "../api";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
@@ -9,7 +9,7 @@ function Comments({currentUserId}) {
 
 	const rootComments = backendComments.filter((backendComment) => 
 		backendComment.parentId === null);
-	
+
 	const getReplies = (commentId) => {
 		return backendComments.filter((backendComment) => backendComment.parentId === commentId)
 		.sort((a,b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
@@ -20,6 +20,17 @@ function Comments({currentUserId}) {
 		createComment(text,parentId).then(comment => {
 			setBackendComments([comment,...backendComments])
 		})
+	}
+
+	const deleteComment = (commentId) => {
+		if (window.confirm('Are you sure that you want to delete comment?')){
+			deleteCommentApi(commentId).then(() => {
+				const updatedBackendComments = backendComments.filter(
+					backendComment => backendComment.id !== commentId
+				);
+				setBackendComments(updatedBackendComments);
+			});
+		}
 	}
 
 	useEffect(() => {
@@ -40,6 +51,7 @@ function Comments({currentUserId}) {
 						comment={rootComment}
 						replies={getReplies(rootComment.id)}
 						currentUserId={currentUserId}
+						deleteComment={deleteComment}
 					/>
 				))}
 			</div>
@@ -47,4 +59,4 @@ function Comments({currentUserId}) {
 	)
 }
 
-export default Comments
+export default Comments;

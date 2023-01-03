@@ -5,7 +5,7 @@ import CommentForm from "./CommentForm";
 
 function Comments({currentUserId}) {
 	const [backendComments,setBackendComments] = useState([]);
-	// console.log(backendComments);
+	const [activeComment, setActiveComment] = useState(null);
 
 	const rootComments = backendComments.filter((backendComment) => 
 		backendComment.parentId === null);
@@ -19,6 +19,7 @@ function Comments({currentUserId}) {
 		console.log("add",text,parentId)
 		createComment(text,parentId).then(comment => {
 			setBackendComments([comment,...backendComments])
+			setActiveComment(null);
 		})
 	}
 
@@ -51,7 +52,10 @@ function Comments({currentUserId}) {
 						comment={rootComment}
 						replies={getReplies(rootComment.id)}
 						currentUserId={currentUserId}
+						addComment={addComment}
 						deleteComment={deleteComment}
+						activeComment={activeComment}
+						setActiveComment={setActiveComment}
 					/>
 				))}
 			</div>

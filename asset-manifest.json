@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Jothishwar/Comments/static/css/main.dfa15702.css",
+    "main.js": "/Jothishwar/Comments/static/js/main.94420791.js",
+    "index.html": "/Jothishwar/Comments/index.html",
+    "main.dfa15702.css.map": "/Jothishwar/Comments/static/css/main.dfa15702.css.map",
+    "main.94420791.js.map": "/Jothishwar/Comments/static/js/main.94420791.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dfa15702.css",
+    "static/js/main.94420791.js"
+  ]
+}

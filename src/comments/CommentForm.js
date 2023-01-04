@@ -1,7 +1,7 @@
 import React,{ useState } from 'react'
 
-function CommentForm({ handleSubmit, submitLabel }) {
-	const [text, setText] = useState("");
+function CommentForm({ handleSubmit, submitLabel,hasCancelButton=false,initialText="",handleCancel }) {
+	const [text, setText] = useState(initialText);
 	const textareaDiasable = text.length === 0;
 	const onSubmit = e => {
 		e.preventDefault();
@@ -12,7 +12,12 @@ function CommentForm({ handleSubmit, submitLabel }) {
 		<form onSubmit={onSubmit}>
 			<textarea className="comment-form" cols="50" rows="5" value={text} 
 			onChange={(e)=>setText(e.target.value)}></textarea>
-			<button className="formSubmit" disabled={textareaDiasable}>{submitLabel}</button>
+			<div className="btns">
+				<button className="formSubmit" disabled={textareaDiasable}>{submitLabel}</button>
+				{hasCancelButton && (
+					<button type="button" className="cancel-btn" onClick={handleCancel} >Cancel</button>
+				)}
+			</div>
 		</form>
 	)
 }

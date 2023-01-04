@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {getComments as getCommentsApi,createComment,deleteComment as deleteCommentApi } from "../api";
+import {getComments as getCommentsApi,createComment,deleteComment as deleteCommentApi,updateComment as updateCommentApi} from "../api";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 
@@ -34,6 +34,19 @@ function Comments({currentUserId}) {
 		}
 	}
 
+	const updateComment = (text,commentId) => {
+		updateCommentApi(text,commentId).then(()=>{
+			const updatedBackendComments = backendComments.map((backendComment) => {
+				if (backendComment.id === commentId) {
+					return {...backendComment,body:text};
+				}
+				return backendComment;
+			});
+			setBackendComments(updatedBackendComments);
+			setActiveComment(null);
+		})
+	}
+
 	useEffect(() => {
 		getCommentsApi().then((data)=>{
 			setBackendComments(data);
@@ -56,6 +69,7 @@ function Comments({currentUserId}) {
 						deleteComment={deleteComment}
 						activeComment={activeComment}
 						setActiveComment={setActiveComment}
+						updateComment={updateComment}
 					/>
 				))}
 			</div>

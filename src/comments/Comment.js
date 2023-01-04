@@ -2,12 +2,12 @@ import React from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CommentForm from './CommentForm';
 
-function Comment({comment,replies,currentUserId,addComment,deleteComment,activeComment,setActiveComment,parentId=null }) {
+function Comment({comment,replies,currentUserId,addComment,deleteComment,activeComment,setActiveComment,parentId=null,updateComment }) {
 
 	const canReply = Boolean(currentUserId);
 	const timepassed = new Date() - new Date(comment.createdAt) > 300000;
 	const canEdit = currentUserId === comment.userId && !timepassed;
-	const canDelete = currentUserId === comment.userId && !timepassed;
+	// const canDelete = currentUserId === comment.userId && !timepassed;
 	const createdAt = new Date(comment.createdAt).toLocaleString();
 	const isReplying = activeComment && activeComment.type === "replying" && activeComment.id === comment.id;
 	const isEditing = activeComment && activeComment.type === "editing" && activeComment.id === comment.id;
@@ -23,7 +23,16 @@ function Comment({comment,replies,currentUserId,addComment,deleteComment,activeC
 					<div className="comment-author">{comment.username}</div>
 					<div>{createdAt}</div>
 				</div>
-				<div className="comment-text">{comment.body}</div>
+				{!isEditing && <div className="comment-text">{comment.body}</div>}
+				{isEditing && (
+					<CommentForm 
+						submitLabel="Update"
+						hasCancelButton
+						initialText={comment.body}
+						handleSubmit={(text)=>updateComment(text,comment.id)}
+						handleCancel={()=>setActiveComment(null)}
+					/>
+				)}
 				<div className="comment-actions">
 					{canReply && <div className="comment-action" onClick={
 						() => setActiveComment({ id:comment.id, type:"replying"})
@@ -34,13 +43,12 @@ function Comment({comment,replies,currentUserId,addComment,deleteComment,activeC
 					{canEdit && <div className="comment-action" onClick={
 						() => setActiveComment({ id:comment.id, type:'editing'})}
 					>Edit</div>}
-					{canDelete && <div 
-						className="comment-action" 
-						onClick={() => deleteComment(comment.id)}
-						>
-							Delete
-						</div>
-					}
+					<div 
+					className="comment-action" 
+					onClick={() => deleteComment(comment.id)}
+					>
+						Delete
+					</div>
 				</div>
 				{isReplying && (
 					<CommentForm submitLabel="Reply" handleSubmit={(text)=>addComment(text,replyId)} />
@@ -57,6 +65,7 @@ function Comment({comment,replies,currentUserId,addComment,deleteComment,activeC
 								activeComment={activeComment}
 								setActiveComment={setActiveComment}
 								parentId={comment.id}
+								updateComment={updateComment}
 							/>
 						))}
 					</div>

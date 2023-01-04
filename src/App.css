@@ -80,3 +80,7 @@ button:hover{
 .comment-action:hover{
 	color: blue;
 }
+
+.cancel-btn{
+	margin-left: 10px;
+}

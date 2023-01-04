@@ -2,7 +2,7 @@ export const getComments = async() => {
 	return [
 	{
 		id: "1",
-		body: "First comment",
+		body: "Try Adding a new comment",
 		username: "Jack",
 		userId: "1",
 		parentId: null,
@@ -18,7 +18,7 @@ export const getComments = async() => {
 	},
 	{
 		id: "3",
-		body: "First comment first child",
+		body: "You can edit the comment only till 5 Mins",
 		username: "John",
 		userId: "2",
 		parentId: "1",
@@ -34,7 +34,7 @@ export const getComments = async() => {
 	},
 	{
 		id: "4",
-		body: "First comment second child",
+		body: "After 5 Mins edit button will disappear",
 		username: "John",
 		userId: "2",
 		parentId: "1",
